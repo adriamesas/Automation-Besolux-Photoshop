@@ -14,6 +14,10 @@ function main() {
     if (!isCorrectVersion() || !isOpenDocs()) return;
 
     var doc = app.activeDocument;
+    if (!doc.saved) {
+        alert('Please save the PSD first so I know where to create the “JPG” folder.','Save the document',true);
+        return;
+    }
 
     var selectedIdx = getSelectedLayerIndices();
     if (selectedIdx.length === 0) {
@@ -44,6 +48,8 @@ function main() {
 
     /* restore */
     app.preferences.rulerUnits = oldUnits;
+    alert('Exported ' + exported + ' JPG file' + (exported>1?'s':'') +
+          ' to:\n' + outFolder.fsName, 'Done');
 }
 
 /* ===== export one layer =========================================== */
@@ -113,7 +119,7 @@ function getSelectedLayerIndices() {
 /* activate a layer via its index, return the DOM layer */
 function activateLayerByIndex(idx) {
     var ref = new ActionReference();
-    ref.putIndex(charIDToTypeID('Lyr '), idx + 1);
+    ref.putIndex(charIDToTypeID('Lyr '), idx);
     var desc = new ActionDescriptor();
     desc.putReference(charIDToTypeID('null'), ref);
     desc.putBoolean(charIDToTypeID('MkVs'), false);
