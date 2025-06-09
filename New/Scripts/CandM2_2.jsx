@@ -5,7 +5,7 @@
     var doc        = app.activeDocument,
         actionName = "createandmerge",
         actionSet  = "BesoLUXediting",
-        passes     = doc.layers.length - 1;     // ← same loop-count as legacy
+        passes     = doc.layers.length - 1;      // same loop-count as legacy
 
     var oldDialogs = app.displayDialogs;
     app.displayDialogs = DialogModes.NO;
@@ -18,16 +18,18 @@
         try {
             app.doAction(actionName, actionSet);
         } catch (err) {
-            // Check if it's the last pass AND the error is "User cancelled the operation"
-            if (i === passes - 1 && err.toString().indexOf("User cancelled the operation") > -1) {
-                // This is the expected error on the final pass,
-                // assume the main part of the action for this pass completed.
-                // Suppress the error and allow the script to continue.
-            } else {
-                // For any other error, or errors on other passes, show the alert and bail
-                alert("Action failed on pass " + (i + 1) + " of " + passes + "\n\n" + err);
-                break;                               // bail out like the old version would
+            /* Photoshop throws error-number 8007—and/or the text
+               “User cancelled the operation”—when there’s nothing left
+               to merge.  Ignore that one, alert on anything else. */
+            var benign =  (err.number === 8007) ||
+                          (/User cancelled/i.test(err.message));
+
+            if (!benign) {
+                alert("Action failed on pass " + (i + 1) + " of " + passes +
+                      "\n\n" + err);
+                break;                         // bail on genuine errors
             }
+            // else: do nothing and continue looping
         }
     }
 
@@ -36,5 +38,5 @@
         doc.layers[0].visible = false;
     }
 
-    app.displayDialogs = oldDialogs;             // restore UI mode
+    app.displayDialogs = oldDialogs;
 })();

@@ -1,0 +1,243 @@
+/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--spectrum-global-color-gray-200); /* Matches Photoshop's theme */
+    overflow: hidden; /* Prevent body scrollbars, let containers handle it */
+    font-family: var(--spectrum-alias-font-family-default);
+    height: 100vh; /* Ensure body takes full viewport height */
+    font-size: var(--spectrum-global-dimension-font-size-100); /* Default base font size */
+}
+
+sp-theme {
+    height: 100%;
+    display: flex; /* Allow views to fill height */
+    flex-direction: column;
+}
+
+.view-container {
+    width: 100%;
+    height: 100%;
+    display: flex; /* Default to flex for content centering/layout */
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.hidden-view {
+    display: none !important;
+}
+
+/* Landing View Styles (adapted from .landing-container) */
+#landing-view {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--spectrum-global-color-gray-100); /* Slightly off-black for depth */
+    padding: 20px;
+}
+.landing-content-wrapper { /* Optional: if you need an inner wrapper */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.landing-logo {
+    max-width: 150px; /* Slightly smaller logo */
+    max-height: 100px; 
+    margin-bottom: 20px; /* Reduced margin */
+}
+
+.landing-title { /* Targets sp-heading size="XL" */
+    margin-bottom: 6px; /* Reduced margin */
+    color: var(--spectrum-global-color-gray-900); 
+    /* Font size for sp-heading is controlled by its 'size' attribute in HTML */
+}
+
+.landing-subtitle { /* Targets sp-body size="L" */
+    margin-bottom: 28px; /* Reduced margin */
+    color: var(--spectrum-global-color-gray-700); 
+    /* Font size for sp-body is controlled by its 'size' attribute in HTML */
+}
+
+#enter-main-plugin-btn { /* Renamed from #enter-plugin-btn for clarity */
+    min-width: 180px; /* Slightly smaller button */
+    cursor: pointer; /* Add pointer cursor for better UX */
+    /* Size for sp-button is controlled by its 'size' attribute in HTML */
+}
+
+/* Main Plugin View Styles (adapted from .plugin-container) */
+
+.plugin-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Fill the #main-plugin-view height */
+    padding: 12px; /* Reduced padding */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent plugin-container itself from scrolling if content fits */
+}
+
+header h1 {
+    margin-top: 0;
+}
+
+.plugin-header {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Reduced gap */
+    margin-bottom: 16px; /* Reduced margin */
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--spectrum-global-color-gray-300); 
+    padding-bottom: 10px; /* Reduced padding */
+}
+
+.header-logo {
+    height: 24px; /* Smaller header logo */
+    width: auto;
+}
+
+.plugin-header sp-heading { /* Targets sp-heading size="L" */
+    color: var(--spectrum-global-color-gray-800);
+    /* Font size for sp-heading is controlled by its 'size' attribute in HTML */
+}
+
+.plugin-section {
+    margin-bottom: 16px; /* Reduced margin */
+    flex-shrink: 0; /* Prevent sections from shrinking too much */
+}
+
+/* Make specific sections scrollable if they overflow */
+.plugin-section.scrollable {
+    overflow-y: auto;
+    flex-grow: 1; /* Allow scrollable sections to take available space */
+}
+
+.plugin-section .section-title { /* Targets sp-heading size="M" */
+    margin-bottom: 8px; /* Reduced margin */
+    color: var(--spectrum-global-color-gray-700); 
+    font-weight: var(--spectrum-alias-font-weight-bold);
+    /* Font size for sp-heading is controlled by its 'size' attribute in HTML */
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Reduced gap */
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+.control-group sp-dropdown {
+    flex-grow: 1;
+}
+
+#select-script-folder-btn {
+    width: 100%; 
+    /* Consider sp-button size="m" or "s" in HTML if text is still too large */
+}
+
+.section-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px; /* Reduced margin */
+}
+
+.layer-list-container {
+    border: 1px solid var(--spectrum-global-color-gray-300); 
+    border-radius: var(--spectrum-alias-border-radius-regular);
+    padding: 8px; /* Reduced padding */
+    min-height: 80px; /* Reduced min-height */
+    max-height: 250px; 
+    overflow-y: auto;  
+    background-color: var(--spectrum-global-color-gray-50); 
+}
+
+.layer-item {
+    margin-bottom: 4px; /* Reduced margin */
+    padding: 1px 0; /* Reduced padding */
+}
+
+.layer-item sp-checkbox {
+    width: 100%;
+    /* Font size for sp-checkbox text is inherited or controlled by Spectrum vars */
+}
+
+.placeholder-text { /* Targets sp-body size="S" */
+    color: var(--spectrum-global-color-gray-500); 
+    font-style: italic;
+    text-align: center;
+    padding: 12px; /* Reduced padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    box-sizing: border-box;
+    /* Font size for sp-body is controlled by its 'size' attribute in HTML */
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 8px; /* Reduced gap */
+    margin-top: 8px; /* Reduced margin */
+}
+
+.action-buttons sp-button {
+    flex-grow: 1;
+    min-width: 140px; /* Slightly reduced min-width */
+    /* Consider sp-button size="m" or "s" in HTML if text is still too large */
+}
+
+#status-log {
+    width: 100%; 
+    box-sizing: border-box;
+    border-radius: var(--spectrum-alias-border-radius-regular);
+    background-color: var(--spectrum-global-color-gray-50);
+    border: 1px solid var(--spectrum-global-color-gray-300);
+    font-size: var(--spectrum-global-dimension-font-size-75); /* Smaller font for log */
+}
+
+.plugin-section.status-log-section {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    min-height: 80px; /* Reduced min-height */
+}
+
+.plugin-section.status-log-section sp-textfield {
+    flex-grow: 1; 
+}
+
+
+footer {
+    margin-top: auto; 
+    padding-top: 10px; /* Reduced padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-top: 1px solid var(--spectrum-global-color-gray-300); 
+}
+
+.hidden { /* General utility class */
+    display: none !important;
+}
+
+/* Ensure icons in buttons are sized appropriately */
+sp-action-button sp-icon,
+sp-button sp-icon {
+    display: contents; 
+}
+
+/* Spectrum component overrides if needed */
+sp-dropdown {
+    width: 100%;
+    /* Font size for sp-dropdown text is inherited or controlled by Spectrum vars */
+}
+
+/* Ensure buttons in the same line are spaced out */
+/* This might be too general, use .control-group or .action-buttons for specific spacing */
+/* section sp-button + sp-button {
+    margin-left: 8px; 
+} */

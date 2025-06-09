@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Automation Plugin</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Spectrum CSS and Web Components -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/theme.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/button.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/checkbox.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/dropdown.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/menu.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/divider.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/textfield.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/progress-circle.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/icon.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/icons-workflow/dist/Refresh.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/icons-workflow/dist/FolderOpen.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/icons-workflow/dist/Gear.js"></script> <!-- Added Gear icon -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@adobe/spectrum-web-components@0.36.0/typography.js"></script>
+</head>
+<body>
+    <sp-theme theme="spectrum" color="darkest" scale="medium">
+        <!-- Landing View -->
+        <div id="landing-view" class="view-container">
+            <div class="landing-content-wrapper">
+                <img src="icons/BESO_LUX_GROUP_LOGO4.png" alt="Company Logo" class="landing-logo">
+                <sp-heading size="XL" class="landing-title">Automation Plugin</sp-heading>
+                <sp-body size="L" class="landing-subtitle">Streamline your Photoshop workflow.</sp-body>
+                <sp-button id="enter-main-plugin-btn" variant="cta" size="xl">Enter Plugin</sp-button>
+            </div>
+        </div>
+
+        <!-- Main Plugin View (initially hidden) -->
+        <div id="main-plugin-view" class="view-container hidden-view">
+            <div class="plugin-container">
+                <header class="plugin-header">
+                    <img src="icons/BESO_LUX_GROUP_LOGO4.png" alt="Company Logo" class="header-logo">
+                    <sp-heading size="L">Automation Plugin</sp-heading>
+                </header>
+
+                <section class="plugin-section">
+                    <sp-heading size="M" class="section-title">Script Selection</sp-heading>
+                    <div class="control-group">
+                        <sp-dropdown id="script-select" placeholder="Select a script">
+                            <sp-menu slot="options">
+                                <!-- Script options will be populated here by JS -->
+                            </sp-menu>
+                        </sp-dropdown>
+                        <sp-action-button id="refresh-scripts-btn" quiet title="Refresh Scripts">
+                            <sp-icon-refresh slot="icon"></sp-icon-refresh>
+                        </sp-action-button>
+                        <sp-action-button id="settings-btn" quiet title="Settings - Change Script Folder">
+                            <sp-icon-gear slot="icon"></sp-icon-gear>
+                        </sp-action-button>
+                    </div>
+                    <!-- Removed old select-script-folder-btn -->
+                </section>
+
+                <sp-divider size="m"></sp-divider>
+
+                <section class="plugin-section">
+                    <div class="section-header-actions">
+                        <sp-heading size="M" class="section-title">Layer Selection</sp-heading>
+                        <sp-action-button id="refresh-layers-btn" quiet title="Refresh Layers">
+                            <sp-icon-refresh slot="icon"></sp-icon-refresh>
+                        </sp-action-button>
+                    </div>
+                    <div id="layer-list" class="layer-list-container">
+                        <sp-body size="S" class="placeholder-text">Open document or refresh to see layers.</sp-body>
+                        <!-- Layer groups will be populated here by JS -->
+                    </div>
+                </section>
+
+                <sp-divider size="m"></sp-divider>
+
+                <section class="plugin-section">
+                    <sp-heading size="M" class="section-title">Actions</sp-heading>
+                    <div class="action-buttons">
+                        <sp-button id="run-script-btn" variant="cta" disabled>Run Script on Selected Layers</sp-button>
+                        <sp-button id="batch-process-btn" variant="primary" disabled>Batch Process Files</sp-button>
+                    </div>
+                </section>
+
+                <sp-divider size="m"></sp-divider>
+
+                <section class="plugin-section status-log-section">
+                    <sp-heading size="M" class="section-title">Status Log</sp-heading>
+                    <sp-textfield multiline id="status-log" readonly placeholder="Plugin messages will appear here..."></sp-textfield>
+                </section>
+
+                <footer>
+                    <sp-progress-circle id="loading-indicator" indeterminate label="Processing..." class="hidden"></sp-progress-circle>
+                </footer>
+            </div>
+        </div>
+    </sp-theme>
+    <script src="index.js"></script>
+</body>
+</html>

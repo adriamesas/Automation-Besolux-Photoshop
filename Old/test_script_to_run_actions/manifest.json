@@ -1,0 +1,22 @@
+{
+  "manifestVersion": 5,
+  "id": "com.example.bluvelrunner",
+  "name": "BLUVEL Runner",
+  "version": "1.1.0",
+  "host": { "app": "PS", "minVersion": "26.0.0" },
+
+  "main": "index.html",
+
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "bluvelPanel",
+      "label": { "default": "BLUVEL Runner" },
+      "panel": { "mainPath": "index.html", "width": 300, "height": 110 }
+    }
+  ],
+
+  "requiredPermissions": {
+    "localFileSystem": "request"
+  }
+}
